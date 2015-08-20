@@ -2,6 +2,13 @@
 __pycache__/
 *.py[cod]
 
+*.pyc
+.scrapy
+channels/app-download
+channels/debug
+channels/images
+channels/log
+
 # C extensions
 *.so
 
