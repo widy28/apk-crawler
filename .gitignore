@@ -8,9 +8,12 @@ channels/app-download
 channels/debug
 channels/images
 channels/log
+channels/nohup.out
 
 # C extensions
 *.so
+
+*.idea
 
 # Distribution / packaging
 .Python

@@ -47,7 +47,7 @@ def get_liqu_detail(response):
     apk_name = response.meta['apk_name']
     app_name = apk_name
     try:
-        app_link = html.xpath('//ul[@class="app_btn"]/li[3]/a/@href').extract()[0]
+        app_link = html.xpath('//div[@class="version_down"]/div[@class="vers_con"][1]/a/@href').extract()[0]
     except:
         ## xpath有误。
         add_error_app_info(app_channel, app_name, '0')

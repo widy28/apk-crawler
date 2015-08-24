@@ -35,7 +35,7 @@ def get_mm10086_detail(response):
     html = Selector(response)
 
     # app_channel = 'mm10086'
-    app_channel = response.meta['app_channle']
+    app_channel = response.meta['app_channel']
     apk_name = response.meta['apk_name']
     app_name = apk_name
     try:

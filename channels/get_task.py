@@ -41,6 +41,9 @@ class MongoDBTaskClient(object):
                                     'undate_time': '',
                                     'end_time': '',})
 
+    def find_one_task(self, app_name):
+        return self.collection.find_one({'app_name': app_name})
+
     def collect_drop(self):
         self.collection.drop()
 
@@ -48,12 +51,12 @@ class MongoDBTaskClient(object):
 def write(q):
     mtc = MongoDBTaskClient()
     while True:
-        print('Process to write: %s' % os.getpid())
+        # print('Process to write: %s' % os.getpid())
         time.sleep(2)
         tasks = mtc.get_task()
-        print 'Queue is empty:--', q.empty()
-        print 'Queue qsize:--', q.qsize()
-        print 'Tasks count:--',tasks.count()
+        # print 'Queue is empty:--', q.empty()
+        # print 'Queue qsize:--', q.qsize()
+        # print 'Tasks count:--',tasks.count()
 
         # 如果队列为空，则取tasks.linit(3)
         # 如果队不为空，判断q.qsize()是否小于3,小于3,则取tasks.linmit(3-q.qsize())添加到q.
@@ -66,10 +69,10 @@ def write(q):
                 tasks = tasks.limit(n-q.qsize())
         for t in tasks:
             if not q.full():
-                print '22222'
+                # print '22222'
                 app_name = t['app_name']
                 q.put(app_name)
-        print '3333'
+        # print '3333'
 
 
         # g = gevent.spawn(read, q)
@@ -77,23 +80,26 @@ def write(q):
 
 # 读数据进程执行的代码:
 def read(q):
+    mtc = MongoDBTaskClient()
     while True:
-        print('Process to read: %s' % os.getpid())
-        print q.qsize(),'*****************************'
-        time.sleep(2)
+        # print('Process to read: %s' % os.getpid())
+        # print q.qsize(),'*****************************'
         for i in range(q.qsize()):
             # if not q.empty():
-            print '44444'
+            # print '44444'
             app_name = q.get()
-            print q.empty(),'====================='
+            # print q.empty(),'====================='
 
             # pr = Process(target=os.system, args=('scrapy crawl channels -a apk_name=' + app_name.encode('utf8'),))
             # print('Process to os.system: %s' % os.getpid())
             # pr.start()
             # pr.join()
+            t = mtc.find_one_task(app_name)
+            print t,'=============='
+            if t['status'] == '0':
+                p = subprocess.Popen('scrapy crawl channels -a apk_name=%s --logfile=log/%s.log'%(app_name, app_name), shell=True)
 
-            p = subprocess.Popen('scrapy crawl channels -a apk_name=%s --logfile=log/%s.log'%(app_name, app_name), shell=True)
-            print p.poll(),'------------------------------------------'
+            # print p.poll(),'------------------------------------------'
     # else:
     #     break
 

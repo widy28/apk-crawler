@@ -42,7 +42,7 @@ def get_youyi_detail(response):
     app_name = apk_name
 
     try:
-        app_link = html.xpath('//div[@class="detailsright "]/ol/li[1]/a/@href').extract()[0]
+        app_link = html.xpath('//a[@class="downlpc down_event"]/@href').extract()[0]
     except:
         ## xpath有误。
         add_error_app_info(app_channel, app_name, '0')

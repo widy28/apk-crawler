@@ -10,7 +10,7 @@ import requests
 
 def send_sina_request(url, **kwargs):
     apk_name = kwargs['apk_name']
-    # apk_name = apk_name.encode('gbk')
+    apk_name = apk_name.encode('gbk')
     return FormRequest(url,
                   formdata={'keyword': apk_name, 'submit.x': '3', 'submit.y': '21'},
                   method='GET',

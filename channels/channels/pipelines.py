@@ -32,11 +32,12 @@ class MongoDBPipeline(object):
             if not ishave:
                 try:
                     self.collection.insert(dict(item))
-                    log.msg("app_info added to MongoDB database!",
+                    log.msg("app_info added to MongoDB database! success",
                         level=log.DEBUG, spider=spider)
                 except:
                     ## todo 入库异常记录
-                    pass
+                    log.msg("app_info added to MongoDB database! unsuccess",
+                        level=log.DEBUG, spider=spider)
         return item
 
 class ChannelsPipeline(object):

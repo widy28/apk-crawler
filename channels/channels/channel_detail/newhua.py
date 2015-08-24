@@ -19,10 +19,12 @@ def send_newhua_request(url, **kwargs):
 def get_newhua_search_list(response):
     log_page(response, 'get_newhua_search_list.html')
 
-    url_list_xpath = '//div[@class="con763 class-sub"]/dl/dd/div[@class="title"]/strong/a[1]/@href'
-    name_list_xpath = '//div[@class="con763 class-sub"]/dl/dd/div[@class="title"]/strong/a[1]/text()'
+    # url_list_xpath = '//div[@class="con763 class-sub"]/dl/dd/div[@class="title"]/strong/a[1]/@href'
+    # name_list_xpath = '//div[@class="con763 class-sub"]/dl/dd/div[@class="title"]/strong/a[1]/text()'
+    url_list_xpath = '//div[@class="MlistA"]/div[@class="item"]/a[@class="det_area"]/@href'
+    name_list_xpath = '//div[@class="MlistA"]/div[@class="item"]/a[@class="det_area"]/h4/text()'
     func = get_newhua_detail
-    host = ''
+    host = 'http://m.onlinedown.net'
     result = get_search_list(response, url_list_xpath, name_list_xpath, func, host)
     if type(result) == list:
         for r in result:
@@ -39,7 +41,8 @@ def get_newhua_detail(response):
 
     # app_channel = 'newhua'
     app_channel = response.meta['app_channel']
-    app_name = html.xpath('//div[@class="app_name"]/h2/span[1]/text()').extract()
+    # app_name = html.xpath('//div[@class="app_name"]/h2/span[1]/text()').extract()
+    app_name = html.xpath('//div[@class="det_intro_box"]/div/h1/text()').extract()
     if app_name:
         app_name = app_name[0]
     else:
@@ -52,16 +55,18 @@ def get_newhua_detail(response):
         return None
 
     try:
-        toget_app_link = 'http://www.onlinedown.net' + html.xpath('//a[@class="megL"]/@href').extract()[0]
-        app_version = html.xpath('//div[@class="app_name"]/h2/span[2]/text()').extract()[0]
+        # toget_app_link = 'http://www.onlinedown.net' + html.xpath('//a[@class="megL"]/@href').extract()[0]
+        # app_version = html.xpath('//div[@class="app_name"]/h2/span[2]/text()').extract()[0]
+
+        app_link = html.xpath('//div[@class="r_area"]/a[2]/@href').extract()[0]
     except:
         ## xpath有误。
         add_error_app_info(app_channel, app_name, '0')
         return None
 
-    app_link=''
     app_pn = ''
     app_size = ''
+    app_version = ''
     save_dir = os.path.sep.join([APK_DOWNLOAD_DIR, apk_name])
 
 
@@ -74,8 +79,8 @@ def get_newhua_detail(response):
     params_dic['app_version'] = app_version     # apk版本号
     params_dic['app_size'] = app_size           # apk文件的大小
 
-    return Request(toget_app_link, meta={'params_dic': params_dic}, callback=get_app_link)
-
+    # return Request(toget_app_link, meta={'params_dic': params_dic}, callback=get_app_link)
+    return download(**params_dic)
 
 def get_app_link(response):
     log_page(response, 'get_newhua_app_link.html')

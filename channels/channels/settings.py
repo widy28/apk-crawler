@@ -174,7 +174,7 @@ CHANNELS_URL_FUNCTION_DICT = {
     # 'http://m.163.com/search/multiform': ('m163', 'send_163_request'),
     # 'http://www.anzhi.com/search.php': ('anzhi', 'send_anzhi_request'),
     # 'http://www.coolapk.com/search': ('coolan', 'send_coolan_request'),
-    'http://down.tech.sina.com.cn/3gsoft/softlist.php': ('sina', 'send_sina_request'),
+    # 'http://down.tech.sina.com.cn/3gsoft/softlist.php': ('sina', 'send_sina_request'),
     # 'http://www.leidian.com/s': ('leidian', 'send_leidian_request'),
     # 'http://www.eoemarket.com/search_.html': ('youyi', 'send_youyi_request'),
     # 'http://www.mgyapp.com/search/all/page1/': ('yingyongku', 'send_yingyongku_request'),
@@ -185,28 +185,31 @@ CHANNELS_URL_FUNCTION_DICT = {
     # 'http://store.oppomobile.com/search/do.html': ('oppo', 'send_oppo_request'),
     # 'http://ks.pconline.com.cn/download.shtml': ('pconline', 'send_pconline_request'),
     # 'http://s.paopaoche.net/cse/search?': ('paopaoche', 'send_paopaoche_request'),
-    # 'http://www.meizumi.com/search': ('meizumi', 'send_meizumi_request'),
+    # 'http://www.meizumi.com//search.html': ('meizumi', 'send_meizumi_request'),
     # 'http://s.mumayi.com/index.php': ('mumayi', 'send_mumayi_request'),
     # 'http://www.nduoa.com/': ('Nduo', 'send_nduo_request'),
     # 'http://zhushou.2345.com/index.php': ('zhushou2345', 'send_zhushou2345_request'),
     # 'http://s.anzhuo.com/searchapp.php': ('anzhuo', 'send_anzhuo_request'),
     # 'http://android.waptw.com/search/': ('waptw', 'send_waptw_request'),
     # 'http://mm.10086.cn/searchapp': ('mm10086', 'send_mm10086_request'),
-    # 'http://www.4355.com/e/search/?searchget=1&tbname=download&tempid=1&show=title,smalltext&keyboard=': ('shouyou4355''send_soft4355_request'),
+    # 'http://www.4355.com/e/search/?searchget=1&tbname=download&tempid=1&show=title,smalltext&keyboard=': ('shouyou4355', 'send_soft4355_request'),
     # 'http://android.d.cn/search/app/': ('dangle', 'send_dangle_request'),
     # 'http://s.pc6.com/cse/search?click=1&s=12026392560237532321&nsid=3&q=': ('pc6', 'send_pc6_request'),
     # 'http://search.520apk.com/cse/search?s=17910776473296434043&nsid=1&q=': ('apk520', 'send_apk520_request'),
-    # 'http://search.newhua.com/search_list.php?searchsid=6&app=search&controller=index&action=search&type=news&searchname=': ('newhua', 'send_newhua_request'),
+    ## 'http://search.newhua.com/search_list.php?searchsid=6&app=search&controller=index&action=search&type=news&searchname=': ('newhua', 'send_newhua_request'),
+    # 'http://m.onlinedown.net/index.php?os=1&search=': ('newhua', 'send_newhua_request'),
     # 'http://so.uzzf.com/cse/search?s=17102071521441408655&nsid=5&q=': ('dongpo', 'send_dongpo_request'),
     # 'http://app.cnmo.com/search/c=a&p=2&f=1&s=': ('cnmo', 'send_cnmo_request'),
+    # 'http://xiazai.zol.com.cn/search': ('zol', 'send_zol_request'),
+    # 'http://www.fengbao.com/index.php': ('fengbao', 'send_fengbao_request'),
+    # 'http://app.mi.com/search': ('xiaomi', 'send_xiaomi_request'),
+    # 'http://apk.gfan.com/search': ('gfan', 'send_gfan_request'),
 
 
-    # 'http://xiazai.zol.com.cn/search': ('zol', 'send_zol_request'),  ## todo 2015.7.22 无法访问。
-    # 'http://www.fengbao.com/index.php': ('fengbao', 'send_fengbao_request'),  ## todo 网站挂了？上不去。
-    # 'http://app.mi.com/search': ('xiaomi', 'send_xiaomi_request'),   ## todo 小米应用商店总是下载超时，无网速。
-    # 'http://apk.gfan.com/search': ('gfan', 'send_gfan_request'),  ## todo 同小米应用商店
-    # 'http://www.apkcn.com/search/': ('anqi', 'send_anqi_request'), ## todo 无法下载
 
+
+
+    'http://www.apkcn.com/search/': ('anqi', 'send_anqi_request'), ## todo 无法下载
     # 'http://www.coolmart.net.cn/#id=search&key=': ('coolpai', 'send_coolpai_request'), # todo 无web页面版本
     # #http://app.taobao.com # todo 淘宝不支持搜索
 }

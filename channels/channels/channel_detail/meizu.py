@@ -27,11 +27,28 @@ def get_meizu_search_list(response):
     search_pn_list = [l['package_name'] for l in data['value']['list']]
 
     apk_name = response.meta['apk_name']
+    app_channel = response.meta['app_channel']
     # print apk_name in search_name_list,'--------'
     if apk_name in search_name_list:
         pn = search_pn_list[search_name_list.index(apk_name)]
         detail_url = 'http://app.meizu.com/apps/public/detail?package_name='+pn
-        yield Request(detail_url, callback=get_meizu_detail)
+        yield Request(detail_url, meta=response.meta, callback=get_meizu_detail)
+    elif filter(lambda name: apk_name in name, search_name_list):
+        """
+        # 部分匹配应用名方式：满足 apk_name是列表search_name_list中每个元素的 子字符串 就下载。。
+        """
+        new_search_name_list = filter(lambda name: apk_name in name, search_name_list)
+        url_list = []
+
+        for n in new_search_name_list:
+            print '5---'*10
+            detail_url = 'http://app.meizu.com/apps/public/detail?package_name=' + search_pn_list[search_name_list.index(n)]
+
+            # 注意，此时meta的参数需要改为当前网站应用的应用名，而不是之前搜索的apk_name
+            url_list.append(Request(detail_url, meta={'apk_name': n, 'app_channel': app_channel}, callback=get_meizu_detail))
+
+        for u in url_list:
+            yield u
     else:
         yield None
 
@@ -41,7 +58,7 @@ def get_meizu_detail(response):
     html = Selector(response)
 
     # app_channel = 'meizu'
-    app_channel = response.meta['app_channle']
+    app_channel = response.meta['app_channel']
     apk_name = response.meta['apk_name']
     app_name = html.xpath('//*[@id="theme_content"]/div[2]/div/div[1]/h3/text()').extract()[0]
     try:

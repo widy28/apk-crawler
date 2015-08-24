@@ -33,10 +33,11 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
     html = Selector(response)
     search_url_list = html.xpath(url_list_xpath).extract()
     search_name_list = html.xpath(name_list_xpath).extract()
+    print search_url_list
     print search_name_list,'===='
-    if host == 'http://www.duote.com':
-        # todo----编码特殊处理
-        search_name_list = [n.split(' ')[0].encode('gbk') for n in search_name_list]
+    # if host == 'http://www.duote.com':
+    #     # todo----编码特殊处理
+    #     search_name_list = [n.split(' ')[0].encode('gbk') for n in search_name_list]
 
     if host == 'http://apk.gfan.com':
         # 特殊处理----去掉空格
@@ -45,8 +46,13 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
     if host == 'http://down.tech.sina.com.cn':
         # todo----编码特殊处理，去掉空格,换行符，
         # 比如搜索招商银行，但是新浪网站的应用名为 招商银行手机银行，就会造成匹配不上无法下载
-        search_name_list = [n.encode('gbk', 'ignore').strip().split(' ')[0] for n in search_name_list]
+        search_name_list = [n.strip().split(' ')[0] for n in search_name_list]
 
+    if 'eoemarket.com' in host:
+        search_url_list = [url.strip() for url in search_url_list]
+
+    if 'meizumi.com' in host:
+        search_name_list = [n.replace('...', '') for n in search_name_list]
 
     # if host == 'http://www.meizumi.com':
     #     # 特殊处理
@@ -134,7 +140,10 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
             detail_url = host + search_url_list[search_name_list.index(n)]
 
             # 注意，此时meta的参数需要改为当前网站应用的应用名，而不是之前搜索的apk_name
-            url_list.append(Request(detail_url, meta={'apk_name': n, 'app_channel': app_channel}, callback=func, headers=headers))
+            url_list.append(Request(detail_url, meta={'apk_name': apk_name,
+                                                      'app_name': n,
+                                                      'app_channel': app_channel},
+                                    callback=func, headers=headers))
 
         return url_list
     # search_url_list，则下载所有的搜索结果。

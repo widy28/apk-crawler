@@ -25,7 +25,7 @@ def get_zhushou2345_search_list(response):
     url_list_xpath = '//div[@class="MboxA serchList_part"]/div[@class="bd"]/ul/li/div[@class="name"]/a/@href'
     name_list_xpath = '//div[@class="MboxA serchList_part"]/div[@class="bd"]/ul/li/div[@class="name"]/a/text()'
     func = get_zhushou2345_detail
-    host = 'http://zhushou.2345.com/'
+    host = ''
     result = get_search_list(response, url_list_xpath, name_list_xpath, func, host)
     if type(result) == list:
         for r in result:
@@ -44,7 +44,7 @@ def get_zhushou2345_detail(response):
     app_name = apk_name
 
     try:
-        app_link = 'http://zhushou.2345.com' + html.xpath('//a[@class="btn_down_to_pc"]/@href').extract()[0]
+        app_link = html.xpath('//a[@class="btn_down_to_pc"]/@href').extract()[0]
     except:
         ## xpath有误。
         add_error_app_info(app_channel, app_name, '0')

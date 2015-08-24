@@ -11,7 +11,7 @@ from channels.settings import APK_DOWNLOAD_DIR
 def send_meizumi_request(url, **kwargs):
     apk_name = kwargs['apk_name']
     return FormRequest(url,
-                    formdata={'q': apk_name},
+                    formdata={'keywords': apk_name},
                     method='GET',
                     meta=kwargs,
                     callback=get_meizumi_search_list)
@@ -20,8 +20,8 @@ def send_meizumi_request(url, **kwargs):
 def get_meizumi_search_list(response):
     log_page(response, 'get_meizumi_search_list.html')
 
-    url_list_xpath = '//div[@class="list"]/ul/li/div[@class="info"]/h4/a/@href'
-    name_list_xpath = '//div[@class="list"]/ul/li/div[@class="info"]/h4/a/text()'
+    url_list_xpath = '//div[@class="detail-gujian"][2]/a/@href'
+    name_list_xpath = '//div[@class="detail-gujian"][2]/a/div/dl/dd[@class="title01"]/text()'
     func = get_meizumi_detail
     host = 'http://www.meizumi.com'
     result = get_search_list(response, url_list_xpath, name_list_xpath, func, host)
@@ -37,11 +37,11 @@ def get_meizumi_detail(response):
     html = Selector(response)
 
     # app_channel = 'meizumi'
-    app_channel = response.meta['app_channle']
+    app_channel = response.meta['app_channel']
     apk_name = response.meta['apk_name']
     app_name = apk_name
     try:
-        app_link = 'http://www.meizumi.com' + html.xpath('//*[@id="buttonbox"]/p[1]/span/a/@href').extract()[0]
+        app_link = html.xpath('//*[@id="buttonbox"]/p[1]/span/a/@href').extract()[0]
         app_pn = html.xpath('//div[@class="detail_right"]/div[1]/p[2]/a/text()').extract()[0]
         app_version = html.xpath('//div[@class="detail_right"]/div[1]/p[3]/text()').extract()[0]
     except:

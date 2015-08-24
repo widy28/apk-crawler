@@ -57,7 +57,7 @@ def get_pconline_detail(response):
     # app_channel = 'pconline'
     app_channel = response.meta['app_channel']
     apk_name = response.meta['apk_name']
-    app_name = apk_name
+    app_name = response.meta['app_name']
 
     try:
         app_link = html.xpath('//a[@class="btn sbDownload"]/@href').extract()[0]
