@@ -9,6 +9,7 @@ channels/debug
 channels/images
 channels/log
 channels/nohup.out
+channels/*.idea
 
 # C extensions
 *.so
