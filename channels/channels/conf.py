@@ -33,11 +33,6 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
     html = Selector(response)
     search_url_list = html.xpath(url_list_xpath).extract()
     search_name_list = html.xpath(name_list_xpath).extract()
-    print search_url_list
-    print search_name_list,'===='
-    # if host == 'http://www.duote.com':
-    #     # todo----编码特殊处理
-    #     search_name_list = [n.split(' ')[0].encode('gbk') for n in search_name_list]
 
     if host == 'http://apk.gfan.com':
         # 特殊处理----去掉空格
@@ -54,22 +49,6 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
     if 'meizumi.com' in host:
         search_name_list = [n.replace('...', '') for n in search_name_list]
 
-    # if host == 'http://www.meizumi.com':
-    #     # 特殊处理
-    #     # 比如搜索招商银行，但是网站的应用名为 招商银行手机银行，就会造成匹配不上无法下载
-    #     # 比如搜索微信，但是网站的应用名为 腾讯微信，就会造成匹配不上无法下载
-    #     pass
-    #
-    # if 'http://www.anruan.com' in response.url:
-    #     # 特殊处理
-    #     # 比如搜索招商银行，但是网站的应用名为 招商银行手机银行，就会造成匹配不上无法下载
-    #     pass
-    #
-    # if host == 'http://os-android.liqucn.com':
-    #     # 特殊处理
-    #     # 比如搜索招商银行，但是网站的应用名为 招商银行手机银行，就会造成匹配不上无法下载
-    #     pass
-
     if 'zol.com.cn' in response.url:
         # 特殊处理
         # 将高亮的apk_name 拼接到 search_name_list 的每个元素。
@@ -81,30 +60,6 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
         if len(search_name_list)/len(search_url_list) == 2:
             new_name_list = zip(search_name_list[::2], search_name_list[1::2])
             search_name_list = [apk_name if apk_name in tn else '' for tn in new_name_list]
-
-    if 'www.4355.com' in response.url:
-        # 特殊处理
-        # search_name_list中可能会出现2个完全匹配的，需要将2个全下载下来。
-        pass
-
-    # if '520apk.com' in response.url:
-    #     # 特殊处理
-    #     # 判断【 和 】是否存在search_name_list里
-    #     new_search_name_list = []
-    #     new_search_url_list = []
-    #     for n in search_name_list:
-    #         if n[0] == '【':
-    #             new_search_name_list.append(n)
-    #             new_search_url_list.append('')
-
-    # print search_name_list,'===='
-    # print apk_name
-    # for n in search_name_list:
-    #     print n, '>>>'*20
-    # print search_url_list, '---', len(search_url_list),len(search_name_list)
-
-
-    print apk_name in search_name_list,'--------'
 
     headers = {
         # 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -223,10 +178,8 @@ def download(**params_dic):
         if not os.path.isdir(save_dir):
             os.makedirs(save_dir)
         try:
-            print '**************'*10
             wget().download(app_link, save_file, headers)
         except:
-            print '17878787878781'*10
             ## 下载失败。
             add_error_app_info(app_channel, app_name, '1')
             yield None
@@ -257,7 +210,7 @@ def download(**params_dic):
         # print status, '-------------------'
 
 
-        # 抽取图标 todo 上线的时候修改 aapt 的路径
+        # 抽取图标
         print '%s get image start:'%app_name
         try:
             print os.path.sep.join(['.', TOOLS_DIR, 'aapt'])+' dump badging '+save_file
@@ -267,7 +220,21 @@ def download(**params_dic):
             add_error_app_info(app_channel, app_name, '2')
             yield None
 
-        # print app_info.decode('utf8').encode('gbk'),'===='
+        # 获取apk真正的名称app_name
+        """ application-label:'CMB'
+            application-label-zh_CN:'招商银行'
+        """
+        # 如果没有application-label-zh_CN 则去查找application-label。
+        pattern = re.compile("application-label-zh_CN:'(.*?)'")
+        re_info = re.search(pattern, app_info)
+        try:
+            info = re_info.group()
+            app_name = info.split("'")[1]
+        except:
+            pattern = re.compile("application-label:'(.*?)'")
+            re_info = re.search(pattern, app_info)
+            info = re_info.group()
+            app_name = info.split("'")[1]
 
         # 如果前面页面不能直接获取到包名，则在此获取包名
         if not app_pn:

@@ -11,6 +11,7 @@ import subprocess
 # import Queue
 import random
 from channels.conf import createMongodbClient
+import datetime
 
 TASK_STATUS = {'0': u'等待中',
                '1': u'爬取中',
@@ -38,7 +39,7 @@ class MongoDBTaskClient(object):
             self.collection.insert({'app_name': app_name,
                                     'status': '0',
                                     'start_time': '',
-                                    'undate_time': '',
+                                    'update_time': '',
                                     'end_time': '',})
 
     def find_one_task(self, app_name):
@@ -46,6 +47,33 @@ class MongoDBTaskClient(object):
 
     def collect_drop(self):
         self.collection.drop()
+
+    def get_need_update_task(self):
+        # 获取状态为 '2'的所有任务--已完成的任务
+        tasks = self.collection.find({'status': '2'})
+        tasks_list = []
+        if tasks:
+            for t in tasks:
+                print t
+                """
+                先判断update_time是否为空，为空则根据end_time去计算是否达到2周的更新时间
+                """
+                now = datetime.datetime.now()
+                update_time = t['update_time']
+                end_time = t['end_time']
+                if update_time:
+                    update_time = datetime.datetime.strptime(update_time, '%Y-%m-%d %H:%M:%S %f')
+                    ## todo 修改(now - update_time).days
+                    d = (now - update_time).seconds/60
+                else:
+                    end_time = datetime.datetime.strptime(end_time, '%Y-%m-%d %H:%M:%S %f')
+                    d = (now - end_time).seconds/60
+
+                ## todo 修改14天
+                print d
+                if d >= 30:
+                    tasks_list.append(t)
+        return tasks_list
 
 # 写数据进程执行的代码:
 def write(q):
@@ -83,6 +111,7 @@ def read(q):
     mtc = MongoDBTaskClient()
     while True:
         # print('Process to read: %s' % os.getpid())
+        time.sleep(2)
         # print q.qsize(),'*****************************'
         for i in range(q.qsize()):
             # if not q.empty():
@@ -95,7 +124,6 @@ def read(q):
             # pr.start()
             # pr.join()
             t = mtc.find_one_task(app_name)
-            print t,'=============='
             if t['status'] == '0':
                 p = subprocess.Popen('scrapy crawl channels -a apk_name=%s --logfile=log/%s.log'%(app_name, app_name), shell=True)
 

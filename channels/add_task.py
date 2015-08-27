@@ -5,11 +5,10 @@ import time
 
 if __name__ == '__main__':
     mt = MongoDBTaskClient()
-
-    mt.collect_drop()
-    mt.insert_task(u'招商银行')
+    # mt.collect_drop()
+    mt.insert_task(u'广东华兴银行')
     # # time.sleep(60)
-    # mt.insert_task(u'建设银行')
+    mt.insert_task(u'招商银行')
     # time.sleep(60)
     # mt.insert_task(u'民生银行')
     # # time.sleep(60)

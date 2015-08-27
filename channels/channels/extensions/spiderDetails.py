@@ -8,6 +8,7 @@ from twisted.internet.task import LoopingCall
 # from xxx.utils.tb_utils import *
 from channels import settings
 from channels.conf import createMongodbClient
+import datetime
 
 class SpiderDetails(object):
     """Extension for collect spider information like start/stop time."""
@@ -31,10 +32,17 @@ class SpiderDetails(object):
 
     def spider_opened(self, spider):
         # start activity poller
-        print '======================='
+        start_time = datetime.datetime.now()
 
-        self.collection.update({'app_name': spider.apk_name},
-                               {'$set': {'status': '1'}})
+        task = self.collection.find_one({'app_name': spider.apk_name})
+        if not task['start_time']:
+            self.collection.update({'app_name': spider.apk_name},
+                                   {'$set': {'status': '1',
+                                    'start_time': start_time.strftime('%Y-%m-%d %H:%M:%S %f')}})
+        else:
+            self.collection.update({'app_name': spider.apk_name},
+                                   {'$set': {'status': '1',
+                                    'update_time': start_time.strftime('%Y-%m-%d %H:%M:%S %f')}})
 
 
         poller = self.pollers[spider.name] = LoopingCall(self.spider_update, spider)
@@ -51,20 +59,18 @@ class SpiderDetails(object):
                 k = str(k).replace('.', '*')
             tb_stats[k] = v
 
-        task = self.collection.find({'app_name': spider.apk_name})
-        self.collection.update({'app_name': spider.apk_name},
-                               {'$set': {'status': '2',
-                                'start_time': tb_stats['start_time'].strftime('%Y-%m-%d %H:%M:%S %f'),
-                                'end_time': tb_stats['finish_time'].strftime('%Y-%m-%d %H:%M:%S %f')}})
-        # task['status'] = '2'
-        # task['start_time'] = tb_stats['start_time']
-        # task['end_time'] = tb_stats['finish_time']
-
+        end_time = datetime.datetime.now()
+        task = self.collection.find_one({'app_name': spider.apk_name})
+        if not task['end_time']:
+            self.collection.update({'app_name': spider.apk_name},
+                                   {'$set': {'status': '2',
+                                    'end_time': end_time.strftime('%Y-%m-%d %H:%M:%S %f')}})
+        else:
+            self.collection.update({'app_name': spider.apk_name},
+                                   {'$set': {'status': '2'}})
 
         print spider.apk_name,'uuuuuuuuuuuuuuuu'
         print tb_stats,'tttttttttttttttttttt'
-
-
 
         # print spider.name,'=-=-=-=-=-=-=-=-=-=-='
         # updateSpiderTrack(spider.name, tb_stats)
