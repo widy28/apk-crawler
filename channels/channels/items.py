@@ -23,6 +23,7 @@ class ChannelsItem(scrapy.Item):
     app_name = scrapy.Field()    # 名称
     app_size = scrapy.Field()    # 大小
     app_version = scrapy.Field() # 版本号
+    app_detail_url = scrapy.Field() # app详情页
     app_link = scrapy.Field()    # 下载链接
     app_pn = scrapy.Field()      # 包名
     app_signMD5 = scrapy.Field() # 签名的md5码
@@ -30,4 +31,5 @@ class ChannelsItem(scrapy.Item):
     app_MD5 = scrapy.Field()     # app的md5码
     app_icon = scrapy.Field()    # 图标文件路径
     app_file = scrapy.Field()    # apk文件的存储路径
+    app_download_times = scrapy.Field() # 下载次数
 
