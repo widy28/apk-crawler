@@ -127,6 +127,8 @@ def download(**params_dic):
         params_dic['app_pn'] = app_pn               # apk包名
         params_dic['app_version'] = app_version     # apk版本号
         params_dic['app_size'] = app_size           # apk文件的大小
+        params_dic['app_detail_url'] = app_detail_url  # apk下载页面的url
+        params_dic['app_download_times'] = app_download_times  # apk的下载次数
     """
     app_channel = params_dic['app_channel']
     app_link = params_dic['app_link']
@@ -135,6 +137,8 @@ def download(**params_dic):
     app_version = params_dic['app_version']
     app_pn = params_dic['app_pn']
     app_size = params_dic['app_size']
+    app_detail_url = params_dic['app_detail_url']
+    app_download_times = params_dic['app_download_times']
 
     def downloadPercent(blocknum, blocksize, totalsize):
             '''回调函数
@@ -333,6 +337,8 @@ def download(**params_dic):
         item['app_MD5'] = app_MD5
         item['app_icon'] = png_dir
         item['app_file'] = save_file
+        item['app_detail_url'] = app_detail_url
+        item['app_download_times'] = app_download_times
 
         print item
 

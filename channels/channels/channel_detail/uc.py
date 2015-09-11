@@ -43,6 +43,7 @@ def get_uc_detail(response):
 
     try:
         app_link = html.xpath('//div[@class="aoubtL"]/a/@href').extract()[0]
+        app_download_times = html.xpath('//div[@class="downMunber"]/ul/li[1]/span/text()').extract()[0]
     except:
         ## xpath有误。
         add_error_app_info(app_channel, app_name, '0')
@@ -58,6 +59,7 @@ def get_uc_detail(response):
     params_dic = {} # 参数字典
     params_dic['app_channel'] = app_channel     # 渠道
     params_dic['app_detail_url'] = response.url # apk下载页面
+    params_dic['app_download_times'] = app_download_times  # apk下载次数
     params_dic['app_link'] = app_link           # apk下载链接
     params_dic['save_dir'] = save_dir           # 下载apk保存的目录
     params_dic['app_name'] = app_name           # 要下载的apk的应用名称

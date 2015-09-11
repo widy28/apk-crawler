@@ -185,7 +185,7 @@ CHANNELS_URL_FUNCTION_DICT = {
     # 'http://store.oppomobile.com/search/do.html': ('oppo', 'send_oppo_request'),
     # 'http://ks.pconline.com.cn/download.shtml': ('pconline', 'send_pconline_request'),
     # 'http://s.paopaoche.net/cse/search?': ('paopaoche', 'send_paopaoche_request'),
-    # 'http://www.meizumi.com//search.html': ('meizumi', 'send_meizumi_request'),
+    # 'http://www.meizumi.com/search.html': ('meizumi', 'send_meizumi_request'),
     # 'http://s.mumayi.com/index.php': ('mumayi', 'send_mumayi_request'),
     # 'http://www.nduoa.com/': ('Nduo', 'send_nduo_request'),
     # 'http://zhushou.2345.com/index.php': ('zhushou2345', 'send_zhushou2345_request'),

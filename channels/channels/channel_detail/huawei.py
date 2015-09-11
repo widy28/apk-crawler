@@ -50,12 +50,13 @@ def get_huawei_detail(response):
 
     try:
         app_link = html.xpath('//div[@class="app-function nofloat"]/a/@dlurl').extract()[0]
+        app_version = html.xpath('//div[@class="app-function nofloat"]/a/@version').extract()[0]
+        app_download_times = html.xpath('//span[@class="grey sub"]/text()').extract()[0].spilt('：')[1]
     except:
         ## xpath有误。
         add_error_app_info(app_channel, app_name, '0')
         return None
 
-    app_version = html.xpath('//div[@class="app-function nofloat"]/a/@version').extract()[0]
     app_pn = ''
     app_size = ''
     save_dir = os.path.sep.join([APK_DOWNLOAD_DIR, apk_name])
@@ -64,6 +65,7 @@ def get_huawei_detail(response):
     params_dic = {} # 参数字典
     params_dic['app_channel'] = app_channel     # 渠道
     params_dic['app_detail_url'] = response.url # apk下载页面
+    params_dic['app_download_times'] = app_download_times  # apk下载次数
     params_dic['app_link'] = app_link           # apk下载链接
     params_dic['save_dir'] = save_dir           # 下载apk保存的目录
     params_dic['app_name'] = app_name           # 要下载的apk的应用名称

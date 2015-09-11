@@ -56,7 +56,7 @@ from paopaoche import send_paopaoche_request
 from nduo import send_nduo_request
 from zhushou2345 import send_zhushou2345_request
 from anzhuo import send_anzhuo_request
-from weptw import send_waptw_request
+from waptw import send_waptw_request
 from anqi import send_anqi_request
 from mm10086 import send_mm10086_request
 from soft4355 import send_soft4355_request

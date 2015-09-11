@@ -46,6 +46,7 @@ def get_360_detail(response):
 
     try:
         app_link = html.xpath('//*[@id="app-info-panel"]/div/dl/dd/a/@href').extract()[0].split('url=')[-1]
+        app_download_times = html.xpath('//*[@id="app-info-panel"]/div/dl/dd/div/span[3]/text()').extract()[0].split(u'：')[1]
     except:
         ## xpath有误。
         add_error_app_info(app_channel, app_name, '0')
@@ -60,6 +61,7 @@ def get_360_detail(response):
     params_dic = {} # 参数字典
     params_dic['app_channel'] = app_channel     # 渠道
     params_dic['app_detail_url'] = response.url # apk下载页面
+    params_dic['app_download_times'] = app_download_times  # apk下载次数
     params_dic['app_link'] = app_link           # apk下载链接
     params_dic['save_dir'] = save_dir           # 下载apk保存的目录
     params_dic['app_name'] = app_name           # 要下载的apk的应用名称
