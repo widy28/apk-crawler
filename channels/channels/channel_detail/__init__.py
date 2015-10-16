@@ -17,6 +17,8 @@ __all__ = ["wandoujia", "baidu", "yingyongbao",
          "send_zhushou2345_request", "send_anzhuo_request", "send_waptw_request", "send_anqi_request",
          "send_mm10086_request", "send_soft4355_request", "send_dangle_request", "send_apk520_request",
          "send_pc6_request", "send_newhua_request", "send_dongpo_request", "send_cnmo_request",
+         "send_sogouzhushou_request", "send_lcrjy_request", "send_ptbus_request", "send_bufan_request",
+
          ]
 
 from wandoujia import send_wandoujia_request
@@ -66,3 +68,7 @@ from pc6 import send_pc6_request
 from newhua import send_newhua_request
 from dongpo import send_dongpo_request
 from cnmo import send_cnmo_request
+from sogouzhushou import send_sogouzhushou_request
+from lcrjy import send_lcrjy_request
+from ptbus import send_ptbus_request
+from bufan import send_bufan_request

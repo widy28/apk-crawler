@@ -152,12 +152,17 @@ CHANNELS_NAME_DICT = {'yingyongbao': u'应用宝',
                  'newhua': u'华军软件园',
                  'dongpo': u'东坡下载',
                  'cnmo': u'手机中国',
+                 'sogouzhushou': u'搜狗助手',
+                 '33lc': u'绿茶安卓网',
+                 'ptbus': u'口袋巴士',
+                 'bufan': u'不凡游戏',
 }
 
 
 # 渠道的搜索url--处理函数function 的字典
+
 CHANNELS_URL_FUNCTION_DICT = {
-    'http://www.wandoujia.com/search': ('wandoujia', 'send_wandoujia_request'),
+    # 'http://www.wandoujia.com/search': ('wandoujia', 'send_wandoujia_request'),
     # 'http://android.myapp.com/myapp/searchAjax.htm': ('yingyongbao', 'send_yingyongbao_request'),
     # 'http://shouji.baidu.com/s': ('baidu', 'send_baidu_request'),
     # 'http://appstore.huawei.com/search/': ('huawei', 'send_huawei_request'),
@@ -204,6 +209,12 @@ CHANNELS_URL_FUNCTION_DICT = {
     # 'http://www.fengbao.com/index.php': ('fengbao', 'send_fengbao_request'),
     # 'http://app.mi.com/search': ('xiaomi', 'send_xiaomi_request'),
     # 'http://apk.gfan.com/search': ('gfan', 'send_gfan_request'),
+    # 'http://zhushou.sogou.com/apps/search.html': ('sogouzhushou', 'send_sogouzhushou_request'),
+    # 'http://www.33lc.com/android/': ('33lc', 'send_lcrjy_request'),
+    # 'http://www.ptbus.com/': ('ptbus', 'send_ptbus_request'),
+    'http://games.bufan.com/search/': ('bufan', 'send_bufan_request'),
+
+
 
 
 
@@ -212,5 +223,4 @@ CHANNELS_URL_FUNCTION_DICT = {
     # #http://app.taobao.com # todo 淘宝不支持搜索
 
 }
-
 

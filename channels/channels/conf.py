@@ -34,6 +34,9 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
     search_url_list = html.xpath(url_list_xpath).extract()
     search_name_list = html.xpath(name_list_xpath).extract()
 
+    print search_name_list
+    print search_url_list,'++++'
+
     if host == 'http://apk.gfan.com':
         # 特殊处理----去掉空格
         search_name_list = [n.strip() for n in search_name_list]
@@ -86,6 +89,7 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
         # 部分匹配应用名方式：满足 apk_name是列表search_name_list中每个元素的 子字符串 就下载。。
         """
         print '2---'*10
+        print search_name_list
         new_search_name_list = filter(lambda name: apk_name in name, search_name_list)
         url_list = []
         print new_search_name_list, '3'*10
@@ -322,7 +326,7 @@ def download(**params_dic):
                     # # linux 重命名文件命令
                     os.system('mv ' + save_file + ' ' + rename_save_file)
                     save_file = rename_save_file
-        print save_file,'$#$#$#$#$#$#'*5
+        print save_file,'$#$#$#$#$#$#--'*5
 
 
         item = ChannelsItem()
@@ -333,7 +337,7 @@ def download(**params_dic):
         item['app_version'] = app_version
         item['app_size'] = app_size
         item['app_signMD5'] = sign_md5
-        item['app_signFileMD5'] = signfile_md5
+        item['app_signFileMD5'] = signfile_md5   # 此字段作废，其实是与app_MD5是同一值
         item['app_MD5'] = app_MD5
         item['app_icon'] = png_dir
         item['app_file'] = save_file
