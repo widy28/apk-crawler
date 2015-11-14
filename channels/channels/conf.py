@@ -64,6 +64,16 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
             new_name_list = zip(search_name_list[::2], search_name_list[1::2])
             search_name_list = [apk_name if apk_name in tn else '' for tn in new_name_list]
 
+    if 'downza.cn' in response.url:
+        search_url_list = filter(lambda u: 'downza.cn/android' in u, search_url_list)
+
+    if 'muzisoft.com' in response.url:
+        new_name_list = []
+        for n in search_name_list:
+            n.replace("<font color='red'>", "").replace("</font>", "")
+            new_name_list.append(n)
+        search_name_list = new_name_list
+
     headers = {
         # 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         # 'Accept-Encoding': 'gzip, deflate, sdch',
@@ -111,7 +121,7 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
         for u in search_url_list:
             print '6----'*10
             detail_url = host + u
-            url_list.append(Request(detail_url, meta={'apk_name': apk_name, 'app_channel': app_channel}, callback=func, headers=headers))
+            url_list.append(Request(detail_url, meta=response.meta, callback=func, headers=headers))
         return url_list
     else:
         print '7---'*10

@@ -156,8 +156,49 @@ CHANNELS_NAME_DICT = {'yingyongbao': u'应用宝',
                  '33lc': u'绿茶安卓网',
                  'ptbus': u'口袋巴士',
                  'bufan': u'不凡游戏',
+
+                 'downza': u'下载之家',
+                 'mooyy': u'摸鱼网,', #### Error infos: DedeCms错误警告：连接数据库失败，可能数据库密码不对或数据库服务器出错！
+                 'tongyi3987': u'统一下载站',
+                 'baifenbai': u'百分网',
+                 'sjvip': u'手机VIP',
+                 'zhuodown': u'捉蛋网',
+                 '77l': u'齐齐乐',
+                 'muzi': u'木子安卓',
+                 'apkqu': u'安趣市场',
+                 'anqu': u'安趣网',
+                 'anzu': u'安族网',
+                 'mumayibbs': u'木蚂蚁论坛',
+                 'anzhuo2265': u'2265安卓网',
+                 'ErEb': u'E人E本',
+                 'sj4399': u'4399手机游戏网',
+                 'anzhuo25': u'爱吾安卓',
+                 'imobile': u'手机之家',
+
+
+
+                 'ccb': u'中国建设银行',
+                 'icbc': u'中国工商银行',
+                 'cmb': u'招商银行',
+                 'cmbc': u'民生银行',
+
 }
 
+
+
+
+"""摸鱼网,统一下载站,
+百分网,手机VIP,捉蛋网,齐齐乐,木子安卓,安趣市场,亿旗,安族网,阳光数码。
+
+1.渠道进行有效性统计。
+2.将棒棒安全的渠道列表全部添加到页面。
+3.将云端服务器的样本拷到本地服务器。
+4.git服务器
+5.防病毒的完善。
+6.渠道的监测需要流畅，稳定。
+7.PPT梳理
+
+"""
 
 # 渠道的搜索url--处理函数function 的字典
 
@@ -212,15 +253,40 @@ CHANNELS_URL_FUNCTION_DICT = {
     # 'http://zhushou.sogou.com/apps/search.html': ('sogouzhushou', 'send_sogouzhushou_request'),
     # 'http://www.33lc.com/android/': ('33lc', 'send_lcrjy_request'),
     # 'http://www.ptbus.com/': ('ptbus', 'send_ptbus_request'),
-    'http://games.bufan.com/search/': ('bufan', 'send_bufan_request'),
+    # 'http://games.bufan.com/search/': ('bufan', 'send_bufan_request'),
+    # 'http://www.downza.cn/android/': ('downza', 'send_downza_request'),
+    # 'http://www.byfby.com/So.aspx': ('baifenbai', 'send_baifenbai_request'),
+    # 'http://www.77l.com/so/': ('77l', 'send_qiqile_request'),
+    # 'http://www.muzisoft.com/plus/search.php': ('muzi', 'send_muzi_request'),
+    # 'http://www.apkqu.com/page/search.html': ('apkqu', 'send_apkqu_request'),
+    # 'http://m.anqu.com/Search/search_game.php': ('anqu', 'send_anqu_request'),
+    # 'http://m.apkzu.com/e/search/index.php': ('anzu', 'send_anzu_request'),
+    # 'http://bbs.mumayi.com/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes&inajax=1': ('mumayibbs', 'send_mumayibbs_request'),
+    # 'http://www.2265.com/sea_{apk_name}.html': ('anzhuo2265', 'send_anzhuo2265_request'),
+    # 'http://www1.eben.cn/search/list/?search=': ('ErEb', 'send_ereb_request')
+    # 'http://a.4399.cn/search.html': ('sj4399', 'send_sj4399_request'),
+    # 'http://www.25az.com/game': ('anzhuo25', 'send_anzhuo25_request'),
+    # 'http://search.imobile.com.cn/index.php': ('imobile', 'send_imobile_request'),
 
 
 
 
+    # 'http://www.ccb.com/cn/home/index.html': ('ccb', 'send_ccb_request'),
+    # 'http://www.icbc.com.cn/ICBC/%E7%94%B5%E5%AD%90%E9%93%B6%E8%A1%8C/%E7%94%B5%E5%AD%90%E9%93%B6%E8%A1%8C%E4%BA%A7%E5%93%81/%E9%87%91%E8%9E%8Da%E5%AE%B6%E4%BA%A7%E5%93%81/%E4%B8%AA%E4%BA%BA%E6%89%8B%E6%9C%BA%E9%93%B6%E8%A1%8C/Android%E6%89%8B%E6%9C%BA%E9%93%B6%E8%A1%8C/android%E6%89%8B%E6%9C%BA%E9%93%B6%E8%A1%8C.htm': ('icbc', 'send_icbc_request'),
+    # 'http://www.cmbchina.com/MBankWeb/Download/DownloadDetail.aspx?os=android': ('cmb', 'send_cmb_request'),
+    'http://www.cmbc.com.cn/cs/Satellite?c=Page&cid=1356495600898&currentId=1375342239458&pagename=cmbc%2FPage%2FTP_PindaoLayout#': ('cmbc', 'send_cmbc_request'),
 
+
+
+    # 'http://www.zhuodown.com/a/yingyongruanjian/': ('zhuodown', 'send_zhuodown_request'), # todo ,搜索有变化。无结果匹配
+    # 'http://app.3987.com/app/android.html': ('tongyi3987', 'send_tongyi3987_request'), # todo, 搜索s参数未获取
     # 'http://www.apkcn.com/search/': ('anqi', 'send_anqi_request'), ## todo 无法下载
     # 'http://www.coolmart.net.cn/#id=search&key=': ('coolpai', 'send_coolpai_request'), # todo 无web页面版本
     # #http://app.taobao.com # todo 淘宝不支持搜索
+    # 'http://www.sjvip.com'# todo 淘宝不支持搜索
 
 }
+## 23号发布
+## 主流银行的官方渠道加入进来
+## 添加新渠道
 

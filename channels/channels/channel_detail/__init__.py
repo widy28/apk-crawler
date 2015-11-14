@@ -18,7 +18,11 @@ __all__ = ["wandoujia", "baidu", "yingyongbao",
          "send_mm10086_request", "send_soft4355_request", "send_dangle_request", "send_apk520_request",
          "send_pc6_request", "send_newhua_request", "send_dongpo_request", "send_cnmo_request",
          "send_sogouzhushou_request", "send_lcrjy_request", "send_ptbus_request", "send_bufan_request",
-
+         "send_downza_request", "send_baifenbai_request", "send_qiqile_request", "send_muzi_request",
+         "send_apkqu_request", "send_anqu_request", "send_anzu_request", "send_mumayibbs_request",
+         "send_anzhuo2265_request", "send_ereb_request", "send_ccb_request", "send_sj4399_request",
+         "send_anzhuo25_request", "send_imobile_request", "send_icbc_request", "send_cmb_request",
+         "send_cmbc_request",
          ]
 
 from wandoujia import send_wandoujia_request
@@ -72,3 +76,20 @@ from sogouzhushou import send_sogouzhushou_request
 from lcrjy import send_lcrjy_request
 from ptbus import send_ptbus_request
 from bufan import send_bufan_request
+from downza import send_downza_request
+from baifenbai import send_baifenbai_request
+from qiqile import send_qiqile_request
+from muzi import send_muzi_request
+from apkqu import send_apkqu_request
+from anqu import send_anqu_request
+from anzu import send_anzu_request
+from mumayibbs import send_mumayibbs_request
+from anzhuo2265 import send_anzhuo2265_request
+from ereb import send_ereb_request
+from ccb import send_ccb_request
+from sj4399 import send_sj4399_request
+from anzhuo25 import send_anzhuo25_request
+from imobile import send_imobile_request
+from icbc import send_icbc_request
+from cmb import send_cmb_request
+from cmbc import send_cmbc_request
