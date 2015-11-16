@@ -22,7 +22,10 @@ __all__ = ["wandoujia", "baidu", "yingyongbao",
          "send_apkqu_request", "send_anqu_request", "send_anzu_request", "send_mumayibbs_request",
          "send_anzhuo2265_request", "send_ereb_request", "send_ccb_request", "send_sj4399_request",
          "send_anzhuo25_request", "send_imobile_request", "send_icbc_request", "send_cmb_request",
-         "send_cmbc_request",
+         "send_cmbc_request", "send_abc_request", "send_bankofchina_request", "send_7xz_request",
+         "send_7230_request", "send_itmop_request", "send_newasp_request", "send_zhuannet_request",
+         "send_ruan8_request", "send_androidcn_request", "send_958shop_request", "send_sjwyx_request",
+         "send_yesky_request", "send_ard9_request",
          ]
 
 from wandoujia import send_wandoujia_request
@@ -93,3 +96,16 @@ from imobile import send_imobile_request
 from icbc import send_icbc_request
 from cmb import send_cmb_request
 from cmbc import send_cmbc_request
+from abcbank import send_abc_request
+from bankofchina import send_bankofchina_request
+from qixz import send_7xz_request
+from shouyou7230 import send_7230_request
+from itmop import send_itmop_request
+from newasp import send_newasp_request
+from zhuannet import send_zhuannet_request
+from ruan8 import send_ruan8_request
+from androidcn import send_androidcn_request
+from baixin import send_958shop_request
+from sjwyx import send_sjwyx_request
+from yesky import send_yesky_request
+from ard9 import send_ard9_request

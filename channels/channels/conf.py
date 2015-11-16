@@ -74,6 +74,9 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
             new_name_list.append(n)
         search_name_list = new_name_list
 
+    if '7xz.com' in response.url:
+        search_name_list = [name.strip() for name in search_name_list]
+
     headers = {
         # 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         # 'Accept-Encoding': 'gzip, deflate, sdch',

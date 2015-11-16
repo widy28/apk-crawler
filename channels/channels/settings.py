@@ -174,6 +174,20 @@ CHANNELS_NAME_DICT = {'yingyongbao': u'应用宝',
                  'sj4399': u'4399手机游戏网',
                  'anzhuo25': u'爱吾安卓',
                  'imobile': u'手机之家',
+                 '7xz': u'七匣子',
+                 '7230': u'7230手游网',
+                 'itmop': u'it猫扑网',
+                 'newasp': u'新云网络',
+                 'zhuannet': u'赚网',
+                 'ruan8': u'软吧',
+                 'androidcn': u'安卓中国',
+                 '958shop': u'百信众联',
+                 'sjwyx': u'手游之家',
+                 'yesky': u'天极网',
+                 'ard9': u'Android之家',
+
+
+
 
 
 
@@ -181,6 +195,9 @@ CHANNELS_NAME_DICT = {'yingyongbao': u'应用宝',
                  'icbc': u'中国工商银行',
                  'cmb': u'招商银行',
                  'cmbc': u'民生银行',
+                 'abc': u'中国农业银行',
+                 'bankofchina': u'中国银行',
+
 
 }
 
@@ -267,6 +284,18 @@ CHANNELS_URL_FUNCTION_DICT = {
     # 'http://a.4399.cn/search.html': ('sj4399', 'send_sj4399_request'),
     # 'http://www.25az.com/game': ('anzhuo25', 'send_anzhuo25_request'),
     # 'http://search.imobile.com.cn/index.php': ('imobile', 'send_imobile_request'),
+    # 'http://www.7xz.com/search': ('7xz', 'send_7xz_request'),
+    # 'http://www.7230.com': ('7230', 'send_7230_request'),
+    # 'http://www.itmop.com/search.asp': ('itmop', 'send_itmop_request'),
+    # 'http://www.newasp.net/': ('newasp', 'send_newasp_request'),
+    # 'http://apk.zhuannet.com/search/': ('zhuannet', 'send_zhuannet_request'),
+    # 'http://www.ruan8.com/search.php': ('ruan8', 'send_ruan8_request'),
+    # 'http://down.androidcn.com/search/q/': ('androidcn', 'send_androidcn_request'),
+    # 'http://d.958shop.com/soft/': ('958shop', 'send_958shop_request'),
+    # 'http://so.sjwyx.com/so/': ('sjwyx', 'send_sjwyx_request'),
+    # 'http://search.yesky.com/searchdownload.do': ('yesky', 'send_yesky_request'),
+    'http://www.ard9.com/index.html': ('ard9', 'send_ard9_request'),
+
 
 
 
@@ -274,7 +303,11 @@ CHANNELS_URL_FUNCTION_DICT = {
     # 'http://www.ccb.com/cn/home/index.html': ('ccb', 'send_ccb_request'),
     # 'http://www.icbc.com.cn/ICBC/%E7%94%B5%E5%AD%90%E9%93%B6%E8%A1%8C/%E7%94%B5%E5%AD%90%E9%93%B6%E8%A1%8C%E4%BA%A7%E5%93%81/%E9%87%91%E8%9E%8Da%E5%AE%B6%E4%BA%A7%E5%93%81/%E4%B8%AA%E4%BA%BA%E6%89%8B%E6%9C%BA%E9%93%B6%E8%A1%8C/Android%E6%89%8B%E6%9C%BA%E9%93%B6%E8%A1%8C/android%E6%89%8B%E6%9C%BA%E9%93%B6%E8%A1%8C.htm': ('icbc', 'send_icbc_request'),
     # 'http://www.cmbchina.com/MBankWeb/Download/DownloadDetail.aspx?os=android': ('cmb', 'send_cmb_request'),
-    'http://www.cmbc.com.cn/cs/Satellite?c=Page&cid=1356495600898&currentId=1375342239458&pagename=cmbc%2FPage%2FTP_PindaoLayout#': ('cmbc', 'send_cmbc_request'),
+    # 'http://www.cmbc.com.cn/cs/Satellite?c=Page&cid=1356495600898&currentId=1375342239458&pagename=cmbc%2FPage%2FTP_PindaoLayout#': ('cmbc', 'send_cmbc_request'),
+    # 'http://mobile.abchina.com/download/clientDownload/zh_CN/startUpSessionAction.ebf': ('abc', 'send_abc_request'),
+    # 'http://www.bankofchina.com/ebanking/bocmbs/': ('bankofchina', 'send_bankofchina_request'),
+
+
 
 
 
