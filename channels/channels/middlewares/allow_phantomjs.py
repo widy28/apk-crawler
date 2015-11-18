@@ -12,7 +12,8 @@ class AllowPhantomjsMiddlewares(object):
     def process_request(self, request, spider):
         allow_middleware_url = ['dl.pconline.com.cn', 'paopaoche.net/android',
                                 'android.d.cn/software', 'www.pc6.com',
-                                'downza.cn/android/']
+                                'downza.cn/android/', 'm.pp.cn/detail.html',
+                                'a.3533.com', 'aliexpress.com/item/']
 
         if filter(lambda u: u in request.url, allow_middleware_url):
             print '111111111111'

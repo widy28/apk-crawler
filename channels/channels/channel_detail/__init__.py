@@ -8,7 +8,7 @@ __all__ = ["wandoujia", "baidu", "yingyongbao",
          "send_wandoujia_request", "send_baidu_request", "send_yingyongbao_request",
          "send_huawei_request", "send_360_request", "send_91_request", "send_lenovomm_request",
          "send_hiapk_request", "send_hao123_request", "send_sogou_request", "send_meizu_request",
-         "send_xiaomi_request", "send_duote_request", "send_suning_request", "send_uc_request",
+         "send_xiaomi_request", "send_duote_request", "send_suning_request", "send_25pp_request",
          "send_163_request", "send_anzhi_request", "send_fengbao_request", "send_gfan_request",
          "send_coolan_request", "send_sina_request", "send_leidian_request", "send_meizumi_request",
          "send_youyi_request", "send_yingyongku_request", "send_anruan_request", "send_mogu_request",
@@ -25,7 +25,10 @@ __all__ = ["wandoujia", "baidu", "yingyongbao",
          "send_cmbc_request", "send_abc_request", "send_bankofchina_request", "send_7xz_request",
          "send_7230_request", "send_itmop_request", "send_newasp_request", "send_zhuannet_request",
          "send_ruan8_request", "send_androidcn_request", "send_958shop_request", "send_sjwyx_request",
-         "send_yesky_request", "send_ard9_request",
+         "send_yesky_request", "send_ard9_request", "send_uc_request", "send_anzow_request",
+         "send_shoujileyuan_request", "send_cncrk_request", "send_3533_request", "send_gezila_request",
+         "send_5577_request", "send_hackhome_request", "send_sz1001_request", "send_aliexpress_request",
+
          ]
 
 from wandoujia import send_wandoujia_request
@@ -42,7 +45,7 @@ from meizu import send_meizu_request
 from xiaomi import send_xiaomi_request
 from duote import send_duote_request
 from suning import send_suning_request
-from uc import send_uc_request
+from anzhuo25pp import send_25pp_request
 from m163 import send_163_request
 from anzhi import send_anzhi_request
 from fengbao import send_fengbao_request
@@ -109,3 +112,13 @@ from baixin import send_958shop_request
 from sjwyx import send_sjwyx_request
 from yesky import send_yesky_request
 from ard9 import send_ard9_request
+from uc import send_uc_request
+from anzow import send_anzow_request
+from shoujileyuan import send_shoujileyuan_request
+from qidian import send_cncrk_request
+from shoujishijie import send_3533_request
+from gezila import send_gezila_request
+from wojiwang import send_5577_request
+from hackhome import send_hackhome_request
+from sz1001 import send_sz1001_request
+from aliexpress import send_aliexpress_request

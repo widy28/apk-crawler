@@ -117,6 +117,7 @@ CHANNELS_NAME_DICT = {'yingyongbao': u'应用宝',
                  'xiaomi': u'小米',
                  'duote': u'多特',
                  'suning': u'苏宁',
+                 '25pp': u'25pp安卓资源站',
                  'uc': u'UC应用商店',
                  'm163': u'网易应用中心',
                  'mumayi': u'木蚂蚁',
@@ -185,6 +186,16 @@ CHANNELS_NAME_DICT = {'yingyongbao': u'应用宝',
                  'sjwyx': u'手游之家',
                  'yesky': u'天极网',
                  'ard9': u'Android之家',
+                 'anzow': u'安卓软件园',
+                 'shoujileyuan': u'手机乐园',
+                 'cncrk': u'起点下载',
+                 '3533': u'手机世界',
+                 'gezila': u'格子啦',
+                 '5577': u'我机网',
+                 'hackhome': u'网侠手机站',
+                 'veryhuo': u'最火软件',
+                 'sz1001': u'1001下载乐园',
+                 'aliexpress': u'aliexpress',
 
 
 
@@ -233,7 +244,7 @@ CHANNELS_URL_FUNCTION_DICT = {
     # 'http://app.meizu.com/apps/public/search/page': ('meizu', 'send_meizu_request'),
     # 'http://www.duote.com/searchPhone.php': ('duote', 'send_duote_request'),
     # 'http://app.suning.com/android/search': ('suning', 'send_suning_request'),
-    # 'http://android.25pp.com/search': ('uc', 'send_uc_request'),
+    # 'http://android.25pp.com/search': ('25pp', 'send_25pp_request'),
     # 'http://m.163.com/search/multiform': ('m163', 'send_163_request'),
     # 'http://www.anzhi.com/search.php': ('anzhi', 'send_anzhi_request'),
     # 'http://www.coolapk.com/search': ('coolan', 'send_coolan_request'),
@@ -294,7 +305,20 @@ CHANNELS_URL_FUNCTION_DICT = {
     # 'http://d.958shop.com/soft/': ('958shop', 'send_958shop_request'),
     # 'http://so.sjwyx.com/so/': ('sjwyx', 'send_sjwyx_request'),
     # 'http://search.yesky.com/searchdownload.do': ('yesky', 'send_yesky_request'),
-    'http://www.ard9.com/index.html': ('ard9', 'send_ard9_request'),
+    # 'http://www.ard9.com/index.html': ('ard9', 'send_ard9_request'),
+    # 'http://m.app.uc.cn/apk/index.php': ('uc', 'send_uc_request'),
+    # 'http://www.anzow.com/Search.shtml': ('anzow', 'send_anzow_request'),
+    # 'http://soft.shouji.com.cn/sort/search.jsp': ('shoujileyuan', 'send_shoujileyuan_request'),
+    # 'http://www.cncrk.com/search.asp': ('cncrk', 'send_cncrk_request'),
+    # 'http://a.3533.com/search/': ('3533', 'send_3533_request'),
+    # 'http://www.gezila.com/search?t=android&q=': ('gezila', 'send_gezila_request'),
+    # 'http://www.5577.com/': ('5577', 'send_5577_request'),
+    # 'http://www.hackhome.com/': ('hackhome', 'send_hackhome_request'),
+    # 'http://www.sz1001.net/query.asp': ('sz1001', 'send_sz1001_request'),
+    'http://www.aliexpress.com/': ('aliexpress', 'send_aliexpress_request'),
+
+
+
 
 
 
@@ -311,12 +335,14 @@ CHANNELS_URL_FUNCTION_DICT = {
 
 
 
+    # 'http://search.veryhuo.com/cse/search?q={apk_name}&click=1&s=2976565871270662586&nsid=2': ('veryhuo', 'send_veryhuo_request'), # todo 测试
+
     # 'http://www.zhuodown.com/a/yingyongruanjian/': ('zhuodown', 'send_zhuodown_request'), # todo ,搜索有变化。无结果匹配
     # 'http://app.3987.com/app/android.html': ('tongyi3987', 'send_tongyi3987_request'), # todo, 搜索s参数未获取
     # 'http://www.apkcn.com/search/': ('anqi', 'send_anqi_request'), ## todo 无法下载
     # 'http://www.coolmart.net.cn/#id=search&key=': ('coolpai', 'send_coolpai_request'), # todo 无web页面版本
     # #http://app.taobao.com # todo 淘宝不支持搜索
-    # 'http://www.sjvip.com'# todo 淘宝不支持搜索
+    # 'http://www.sjvip.com'# todo 不支持搜索
 
 }
 ## 23号发布

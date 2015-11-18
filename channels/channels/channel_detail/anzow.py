@@ -8,21 +8,21 @@ from channels.conf import *
 from channels.settings import APK_DOWNLOAD_DIR
 
 
-def send_uc_request(url, **kwargs):
+def send_anzow_request(url, **kwargs):
     apk_name = kwargs['apk_name']
-    url = url+ '?system=source&module=search&action=sm&app=&f=12_0_0_0_0&uc_param_str=dnfrpfbives11scpmibtbmntnisieigd&keyword='+apk_name
     return FormRequest(url,
+                       formdata={'q': apk_name, 'stype': 'anzow'},
                        method='GET',
                        meta=kwargs,
-                       callback=get_uc_search_list)
+                       callback=get_anzow_search_list)
 
 
-def get_uc_search_list(response):
-    log_page(response, 'get_uc_search_list.html')
+def get_anzow_search_list(response):
+    log_page(response, 'get_anzow_search_list.html')
 
-    url_list_xpath = '//ul[@class="J_ajaxWrap"]/li/a/@href'
-    name_list_xpath = '//ul[@class="J_ajaxWrap"]/li/dl/dt/span/span/text()'
-    func = get_uc_detail
+    url_list_xpath = '//div[@class="box boxsbg"]/dl/dd[@class="down_title"]/h2/a/@href'
+    name_list_xpath = '//div[@class="box boxsbg"]/dl/dd[@class="down_title"]/h2/a/@title'
+    func = get_anzow_detail
     host = ''
     result = get_search_list(response, url_list_xpath, name_list_xpath, func, host)
     if type(result) == list:
@@ -32,24 +32,21 @@ def get_uc_search_list(response):
         yield result
 
 
-def get_uc_detail(response):
-    log_page(response, 'get_uc_detail.html')
+def get_anzow_detail(response):
+    log_page(response, 'get_anzow_detail.html')
     html = Selector(response)
 
-    # app_channel = 'uc'
+    # app_channel = 'anzow'
     apk_name = response.meta['apk_name']
     app_channel = response.meta['app_channel']
-    app_name = html.xpath('//h3[@class="detail-info-title"]/text()').extract()
+    app_name = html.xpath('//h1[@class="down_title"]/text()').extract()
     if app_name:
         app_name = app_name[0]
     else:
         app_name = apk_name
 
     try:
-        app_id = html.xpath('//*[@id="btn-down"]/@data-appid').extract()[0]
-
-        app_link = 'http://server.m.pp.cn/download/apk?appId={app_id}&ch_src=sm&ch=uc&query={apk_name}&uc_param_str=dnfrpfbivesscpmibtbmntnisieigd&custom=1'.format(app_id=app_id, apk_name=apk_name)
-        print app_link,'==================='
+        app_link = html.xpath('//div[@class="contentdbtn"]/a/@href').extract()[0]
     except:
         ## xpath有误。
         add_error_app_info(app_channel, app_name, '0')

@@ -8,22 +8,22 @@ from channels.conf import *
 from channels.settings import APK_DOWNLOAD_DIR
 
 
-def send_uc_request(url, **kwargs):
+def send_sz1001_request(url, **kwargs):
     apk_name = kwargs['apk_name']
-    url = url+ '?system=source&module=search&action=sm&app=&f=12_0_0_0_0&uc_param_str=dnfrpfbives11scpmibtbmntnisieigd&keyword='+apk_name
     return FormRequest(url,
+                       formdata={'q': apk_name.encode('gb2312')},
                        method='GET',
                        meta=kwargs,
-                       callback=get_uc_search_list)
+                       callback=get_sz1001_search_list)
 
 
-def get_uc_search_list(response):
-    log_page(response, 'get_uc_search_list.html')
+def get_sz1001_search_list(response):
+    log_page(response, 'get_sz1001_search_list.html')
 
-    url_list_xpath = '//ul[@class="J_ajaxWrap"]/li/a/@href'
-    name_list_xpath = '//ul[@class="J_ajaxWrap"]/li/dl/dt/span/span/text()'
-    func = get_uc_detail
-    host = ''
+    url_list_xpath = '//div[@id="results"]/ul/li[@class="softname"]/a/@href'
+    name_list_xpath = '//div[@id="results"]/ul/li[@class="softname"]/a/text()'
+    func = get_sz1001_detail
+    host = 'http://www.sz1001.net'
     result = get_search_list(response, url_list_xpath, name_list_xpath, func, host)
     if type(result) == list:
         for r in result:
@@ -32,24 +32,23 @@ def get_uc_search_list(response):
         yield result
 
 
-def get_uc_detail(response):
-    log_page(response, 'get_uc_detail.html')
+def get_sz1001_detail(response):
+    log_page(response, 'get_sz1001_detail.html')
     html = Selector(response)
 
-    # app_channel = 'uc'
+    # app_channel = 'sz1001'
     apk_name = response.meta['apk_name']
     app_channel = response.meta['app_channel']
-    app_name = html.xpath('//h3[@class="detail-info-title"]/text()').extract()
+    app_name = html.xpath('//div[@class="module app"]/div[1]/div[@class="info"]/h1/text()').extract()
     if app_name:
         app_name = app_name[0]
     else:
         app_name = apk_name
 
     try:
-        app_id = html.xpath('//*[@id="btn-down"]/@data-appid').extract()[0]
-
-        app_link = 'http://server.m.pp.cn/download/apk?appId={app_id}&ch_src=sm&ch=uc&query={apk_name}&uc_param_str=dnfrpfbivesscpmibtbmntnisieigd&custom=1'.format(app_id=app_id, apk_name=apk_name)
-        print app_link,'==================='
+        app_link = html.xpath('//*[@id="downurl"]/ul/li[4]/a/@href').extract()[0]
+        if app_link[-4:] != '.apk':
+            return None
     except:
         ## xpath有误。
         add_error_app_info(app_channel, app_name, '0')
