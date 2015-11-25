@@ -28,7 +28,12 @@ __all__ = ["wandoujia", "baidu", "yingyongbao",
          "send_yesky_request", "send_ard9_request", "send_uc_request", "send_anzow_request",
          "send_shoujileyuan_request", "send_cncrk_request", "send_3533_request", "send_gezila_request",
          "send_5577_request", "send_hackhome_request", "send_sz1001_request", "send_aliexpress_request",
-
+         "send_apkke_request", "send_android155_request", "send_myapks_request", "send_cr173_request",
+         "send_bkill_request", "send_52z_request", "send_9ht_request", "send_srui_request",
+         "send_jb51_request", "send_anfensi_request", "send_skycn_request", "send_borpor_request",
+         "send_paojiao_request", "send_youxibaba_request", "send_fpwap_request", "send_tompda_request",
+         "send_8471_request", "send_androidmi_request", "send_pn66_request", "send_softboxes_request",
+         "send_dbtapk_request", "send_gamedog_request",
          ]
 
 from wandoujia import send_wandoujia_request
@@ -122,3 +127,25 @@ from wojiwang import send_5577_request
 from hackhome import send_hackhome_request
 from sz1001 import send_sz1001_request
 from aliexpress import send_aliexpress_request
+from apkke import send_apkke_request
+from android155 import send_android155_request
+from myapks import send_myapks_request
+from cr173 import send_cr173_request
+from bkill import send_bkill_request
+from feixiangxiazai import send_52z_request
+from jiuhaoxiazai import send_9ht_request
+from srui import send_srui_request
+from jb51 import send_jb51_request
+from anfensi import send_anfensi_request
+from skycn import send_skycn_request
+from baoping import send_borpor_request
+from paojiao import send_paojiao_request
+from youxibaba import send_youxibaba_request
+from fpwap import send_fpwap_request
+from tompda import send_tompda_request
+from android8471 import send_8471_request
+from androidmi import send_androidmi_request
+from pn66 import send_pn66_request
+from softboxes import send_softboxes_request
+from dbtapk import send_dbtapk_request
+from gamedog import send_gamedog_request

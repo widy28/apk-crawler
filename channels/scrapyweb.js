@@ -11,7 +11,7 @@ page.customHeaders = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
 };
 page.settings.userAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.76 Safari/537.36';
-//phantom.outputEncoding = 'gbk';
+phantom.outputEncoding = 'gbk';
 var system = require('system');
 page.open(system.args[1], function(status){
     console.log(system.args[1])

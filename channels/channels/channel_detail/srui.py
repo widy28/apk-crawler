@@ -8,39 +8,39 @@ from channels.conf import *
 from channels.settings import APK_DOWNLOAD_DIR
 
 
-def send_newasp_request(url, **kwargs):
+def send_srui_request(url, **kwargs):
     apk_name = kwargs['apk_name']
     return FormRequest(url,
                        method='GET',
                        meta=kwargs,
-                       callback=get_newasp_search_formdata)
+                       callback=get_srui_search_formdata)
 
 
-def get_newasp_search_formdata(response):
-    log_page(response, 'get_newasp_search_formdata.html')
+def get_srui_search_formdata(response):
+    log_page(response, 'get_srui_search_formdata.html')
     html = Selector(response)
 
-    search_url = html.xpath('//form[@id="formsearch"]/@action').extract()
-    s = html.xpath('//form[@id="formsearch"]/ul/li[@class="shlst"]/input[@name="s"]/@value').extract()
-    # nsid = html.xpath('//form[@id="formsearch"]/ul/li[@class="shlst"]/input[@name="nsid"]/@value').extract()
+    search_url = html.xpath('//form[@class="search"]/@action').extract()
+    s = html.xpath('//form[@class="search"]/input[@name="s"]/@value').extract()
 
     if search_url and s:
         return FormRequest(search_url[0],
-                           formdata={'q': response.meta['apk_name'], 's': s[0], 'nsid': '3'},
+                           formdata={'q': response.meta['apk_name'].encode('gbk'),
+                                     's': s[0]},
                            method='GET',
                            meta=response.meta,
-                           callback=get_newasp_search_list)
+                           callback=get_srui_search_list)
 
     else:
         return None
 
 
-def get_newasp_search_list(response):
-    log_page(response, 'get_newasp_search_list.html')
+def get_srui_search_list(response):
+    log_page(response, 'get_srui_search_list.html')
 
-    url_list_xpath = '//*[@id="results"]/div/h3/a/@href'
-    name_list_xpath = '//*[@id="results"]/div/h3/a/text()'
-    func = get_newasp_detail
+    url_list_xpath = '//div[@id="results"]/div/h3/a/@href'
+    name_list_xpath = '//div[@id="results"]/div/h3/a/text()'
+    func = get_srui_detail
     host = ''
     result = get_search_list(response, url_list_xpath, name_list_xpath, func, host)
     if type(result) == list:
@@ -50,28 +50,31 @@ def get_newasp_search_list(response):
         yield result
 
     # html = Selector(response)
-    # detail_url = 'http://apk.newasp.com' + html.xpath('//div[@class="list-page"]/ul/li[1]/p/span[1]/a/@href').extract()[0]
-    # yield Request(detail_url, callback=get_newasp_detail)
+    # detail_url = 'http://apk.srui.com' + html.xpath('//div[@class="list-page"]/ul/li[1]/p/span[1]/a/@href').extract()[0]
+    # yield Request(detail_url, callback=get_srui_detail)
 
 
-def get_newasp_detail(response):
-    log_page(response, 'get_newasp_detail.html')
+def get_srui_detail(response):
+    log_page(response, 'get_srui_detail.html')
     html = Selector(response)
 
-    # app_channel = 'newasp'
+    # app_channel = 'srui'
     app_channel = response.meta['app_channel']
     apk_name = response.meta['apk_name']
-    app_names = html.xpath('//div[@class="infobox"]/div[@class="tit"]/h1/text()').extract()
+    app_names = html.xpath('//*[@id="softtitle"]/text()').extract()
     if app_names:
         app_name = app_names[0]
     else:
         app_name = apk_name
 
     try:
-        app_link_script = html.xpath('//*[@id="downlist"]/script/text()').extract()[0].split(';')[0]
-        pattern = re.compile('href="(.*?)"')
-        re_info = re.search(pattern, app_link_script)
-        app_link = re_info.group()[6:-1]
+        app_links = html.xpath('//td[2]/a/@href').extract()
+        if app_links:
+            app_links = [l for l in app_links if l[-4:] == '.apk']
+            if app_links:
+                app_link = app_links[0]
+        else:
+            return None
     except:
         ## xpath有误。
         add_error_app_info(app_channel, app_name, '0')
@@ -80,7 +83,11 @@ def get_newasp_detail(response):
     app_version = ''
     app_size = ''
     save_dir = os.path.sep.join([APK_DOWNLOAD_DIR, apk_name])
-    app_download_times = ''
+    app_download_times = html.xpath('//dl[@class="dl-info fl"]/dd/text()').extract()
+    if app_download_times:
+        app_download_times = app_download_times[0]
+    else:
+        app_download_times = ''
 
 
     params_dic = {} # 参数字典

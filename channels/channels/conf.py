@@ -103,23 +103,32 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
         """
         print '2---'*10
         print search_name_list
-        new_search_name_list = filter(lambda name: apk_name in name, search_name_list)
+
+        new_search_url_list = []
+        for i in range(len(search_name_list)):
+            name = search_name_list[i]
+            if apk_name in name:
+                new_search_url_list.append(search_url_list[i])
+
+
+        # new_search_name_list = filter(lambda name: apk_name in name, search_name_list)
         url_list = []
-        print new_search_name_list, '3'*10
 
-        for n in new_search_name_list:
+        for u in new_search_url_list:
             print '5---'*10
-            detail_url = host + search_url_list[search_name_list.index(n)]
-
+            detail_url = host + u
+            # print detail_url,'==============='
             # 注意，此时meta的参数需要改为当前网站应用的应用名，而不是之前搜索的apk_name
             url_list.append(Request(detail_url, meta={'apk_name': apk_name,
-                                                      'app_name': n,
                                                       'app_channel': app_channel},
                                     callback=func, headers=headers))
 
+        print url_list
+        print '+++++++++++++++++++++++++++++++++++'
         return url_list
     # search_url_list，则下载所有的搜索结果。
-    elif search_url_list and len(search_name_list) > len(search_url_list):
+    # elif search_url_list and len(search_name_list) > len(search_url_list):
+    elif search_url_list:
         url_list = []
         for u in search_url_list:
             print '6----'*10
@@ -416,3 +425,11 @@ def createMongodbClient(collection):
         db.authenticate(settings.MONGODB_DB_USERNAME, settings.MONGODB_DB_PWD)
     collection = db[collection]
     return collection
+
+## 删除下载失败的apk临时文件
+def clear_download_bad_file():
+    for current_dir, child_dirs, files in os.walk(os.sep.join([PROJECT_DIR, APK_DOWNLOAD_DIR])):
+        for file in files:
+            if file.startswith('__'):
+                os.system('rm ' + os.sep.join([current_dir, file]))
+    print 'clear done!!!!'
