@@ -34,17 +34,17 @@ import datetime, time
 #                 q.put(app_name)
 
 
-def update():
-    mt = MongoDBTaskClient()
-    tasks_list = mt.get_need_update_task()
-    while True:
-        time.sleep(2)
-        if tasks_list:
-            for t in tasks_list:
-                if t['status'] == '3':
-                    app_name = t['app_name']
-                    p = subprocess.Popen('scrapy crawl channels -a apk_name=%s --logfile=log/%s.log'%(app_name, app_name), shell=True)
-
+# def update():
+#     mt = MongoDBTaskClient()
+#     tasks_list = mt.get_need_update_task()
+#     while True:
+#         time.sleep(2)
+#         if tasks_list:
+#             for t in tasks_list:
+#                 if t['status'] == '3':
+#                     app_name = t['app_name']
+#                     p = subprocess.Popen('scrapy crawl channels -a apk_name=%s --logfile=log/%s.log'%(app_name, app_name), shell=True)
+#
 
 if __name__ == '__main__':
     # p = Process(target=update)
@@ -53,12 +53,13 @@ if __name__ == '__main__':
 
     mt = MongoDBTaskClient()
     tasks_list = mt.get_need_update_task()
-    print tasks_list,'--------------'
+    # print tasks_list,'--------------'
 
     if tasks_list:
         for t in tasks_list:
             app_name = t['app_name']
             p = subprocess.Popen('scrapy crawl channels -a apk_name=%s --logfile=log/%s.log'%(app_name, app_name), shell=True)
 
-
-
+    now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S %f')
+    with open('test_crontab.log', 'a') as f:
+        f.write(now + '\n')

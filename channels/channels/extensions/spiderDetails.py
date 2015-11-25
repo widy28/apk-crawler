@@ -32,17 +32,17 @@ class SpiderDetails(object):
 
     def spider_opened(self, spider):
         # start activity poller
-        # start_time = datetime.datetime.now()
-        #
-        # task = self.collection.find_one({'app_name': spider.apk_name})
-        # if not task['start_time']:
-        #     self.collection.update({'app_name': spider.apk_name},
-        #                            {'$set': {'status': '1',
-        #                             'start_time': start_time.strftime('%Y-%m-%d %H:%M:%S %f')}})
-        # else:
-        #     self.collection.update({'app_name': spider.apk_name},
-        #                            {'$set': {'status': '1',
-        #                             'update_time': start_time.strftime('%Y-%m-%d %H:%M:%S %f')}})
+        start_time = datetime.datetime.now()
+
+        task = self.collection.find_one({'app_name': spider.apk_name})
+        if not task['start_time']:
+            self.collection.update({'app_name': spider.apk_name},
+                                   {'$set': {'status': '1',
+                                    'start_time': start_time.strftime('%Y-%m-%d %H:%M:%S %f')}})
+        else:
+            self.collection.update({'app_name': spider.apk_name},
+                                   {'$set': {'status': '1',
+                                    'update_time': start_time.strftime('%Y-%m-%d %H:%M:%S %f')}})
 
 
         poller = self.pollers[spider.name] = LoopingCall(self.spider_update, spider)
@@ -54,21 +54,21 @@ class SpiderDetails(object):
         sys_stats = self.crawler.stats.get_stats()
         tb_stats = {}
         # print sys_stats,'sssssssssssssssssssssssssss'
-        # for (k,v) in sys_stats.items():
-        #     if '.' in k:
-        #         k = str(k).replace('.', '*')
-        #     tb_stats[k] = v
-        #
-        # end_time = datetime.datetime.now()
-        # task = self.collection.find_one({'app_name': spider.apk_name})
-        # if not task['end_time']:
-        #     self.collection.update({'app_name': spider.apk_name},
-        #                            {'$set': {'status': '2',
-        #                             'end_time': end_time.strftime('%Y-%m-%d %H:%M:%S %f')}})
-        # else:
-        #     self.collection.update({'app_name': spider.apk_name},
-        #                            {'$set': {'status': '2'}})
-        #
+        for (k,v) in sys_stats.items():
+            if '.' in k:
+                k = str(k).replace('.', '*')
+            tb_stats[k] = v
+
+        end_time = datetime.datetime.now()
+        task = self.collection.find_one({'app_name': spider.apk_name})
+        if not task['end_time']:
+            self.collection.update({'app_name': spider.apk_name},
+                                   {'$set': {'status': '2',
+                                             'end_time': end_time.strftime('%Y-%m-%d %H:%M:%S %f')}})
+        else:
+            self.collection.update({'app_name': spider.apk_name},
+                                   {'$set': {'status': '2'}})
+
         # print spider.apk_name,'uuuuuuuuuuuuuuuu'
         # print tb_stats,'tttttttttttttttttttt'
 

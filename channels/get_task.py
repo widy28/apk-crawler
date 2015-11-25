@@ -64,14 +64,16 @@ class MongoDBTaskClient(object):
                 if update_time:
                     update_time = datetime.datetime.strptime(update_time, '%Y-%m-%d %H:%M:%S %f')
                     ## todo 修改(now - update_time).days
-                    d = (now - update_time).seconds/60
+                    # d = (now - update_time).seconds/60
+                    d = (now - update_time).days
                 else:
                     end_time = datetime.datetime.strptime(end_time, '%Y-%m-%d %H:%M:%S %f')
-                    d = (now - end_time).seconds/60
+                    # d = (now - end_time).seconds/60
+                    d = (now - end_time).days
 
                 ## todo 修改14天
                 print d
-                if d >= 30:
+                if d >= 14:
                     tasks_list.append(t)
         return tasks_list
 
