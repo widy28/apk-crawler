@@ -91,12 +91,23 @@ def get_search_list(response, url_list_xpath, name_list_xpath, func, host):
 
     if apk_name in search_name_list:
         """
-        # 完全匹配应用名方式
+        # 完全匹配应用名方式，后来遇到个别网站，同一个名称不同链接会出现2个或者更多，递归判断一下
         """
         print '1----'*10
         print response.meta
-        detail_url = host + search_url_list[search_name_list.index(apk_name)]
-        return Request(detail_url, meta=response.meta, callback=func, headers=headers)
+        url_list = []
+        def is_have(search_name_list):
+            if apk_name in search_name_list:
+                i = search_name_list.index(apk_name)
+                detail_url = host + search_url_list[i]
+                url_list.append(Request(detail_url, meta=response.meta, callback=func, headers=headers))
+                search_name_list.pop(i)
+                search_url_list.pop(i)
+                return is_have(search_name_list)
+            return url_list
+        # print is_have(search_name_list)
+
+        return is_have(search_name_list)
     elif filter(lambda name: apk_name in name, search_name_list):
         """
         # 部分匹配应用名方式：满足 apk_name是列表search_name_list中每个元素的 子字符串 就下载。。

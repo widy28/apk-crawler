@@ -51,13 +51,13 @@ class SpiderDetails(object):
     def spider_closed(self, spider, reason):
         # 更新状态，通知与记录状态
         # key 转换，不然这样的stats.downloader/exception_type_count/twisted.web._newclient.ResponseNeverReceived会提示错误
-        sys_stats = self.crawler.stats.get_stats()
-        tb_stats = {}
+        # sys_stats = self.crawler.stats.get_stats()
+        # tb_stats = {}
         # print sys_stats,'sssssssssssssssssssssssssss'
-        for (k,v) in sys_stats.items():
-            if '.' in k:
-                k = str(k).replace('.', '*')
-            tb_stats[k] = v
+        # for (k,v) in sys_stats.items():
+        #     if '.' in k:
+        #         k = str(k).replace('.', '*')
+        #     tb_stats[k] = v
 
         end_time = datetime.datetime.now()
         task = self.collection.find_one({'app_name': spider.apk_name})

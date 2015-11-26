@@ -33,7 +33,8 @@ __all__ = ["wandoujia", "baidu", "yingyongbao",
          "send_jb51_request", "send_anfensi_request", "send_skycn_request", "send_borpor_request",
          "send_paojiao_request", "send_youxibaba_request", "send_fpwap_request", "send_tompda_request",
          "send_8471_request", "send_androidmi_request", "send_pn66_request", "send_softboxes_request",
-         "send_dbtapk_request", "send_gamedog_request",
+         "send_dbtapk_request", "send_gamedog_request", "send_shouyou520_request", "send_9game_request",
+         "send_anzhuoyuan_request", "send_appchina_request",
          ]
 
 from wandoujia import send_wandoujia_request
@@ -149,3 +150,7 @@ from pn66 import send_pn66_request
 from softboxes import send_softboxes_request
 from dbtapk import send_dbtapk_request
 from gamedog import send_gamedog_request
+from shouyou520 import send_shouyou520_request
+from game9 import send_9game_request
+from anzhuoyuan import send_anzhuoyuan_request
+from appchina import send_appchina_request

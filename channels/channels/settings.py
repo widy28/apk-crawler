@@ -218,6 +218,11 @@ CHANNELS_NAME_DICT = {'yingyongbao': u'应用宝',
                  'softboxes': u'安卓库',
                  'dbtapk': u'安卓大不同',
                  'gamedog': u'游戏狗',
+                 'shouyou520': u'手游520',
+                 '9game': u'九游',
+                 'anzhuoyuan': u'安卓园',
+                 'appchina': u'应用汇',
+
 
 
 
@@ -235,21 +240,6 @@ CHANNELS_NAME_DICT = {'yingyongbao': u'应用宝',
 
 }
 
-
-
-
-"""摸鱼网,统一下载站,
-百分网,手机VIP,捉蛋网,齐齐乐,木子安卓,安趣市场,亿旗,安族网,阳光数码。
-
-1.渠道进行有效性统计。
-2.将棒棒安全的渠道列表全部添加到页面。
-3.将云端服务器的样本拷到本地服务器。
-4.git服务器
-5.防病毒的完善。
-6.渠道的监测需要流畅，稳定。
-7.PPT梳理
-
-"""
 
 # 渠道的搜索url--处理函数function 的字典
 
@@ -362,7 +352,13 @@ CHANNELS_URL_FUNCTION_DICT = {
     # 'http://www.pn66.com/e/search/index.php': ('pn66', 'send_pn66_request'),
     # 'http://www.softboxes.cn/index.php?tpl=search&q=': ('softboxes', 'send_softboxes_request'),
     # 'http://www.dbtapk.com/plus/search/': ('dbtapk', 'send_dbtapk_request'),
-    'http://www.gamedog.cn/': ('gamedog', 'send_gamedog_request'),
+    # 'http://www.gamedog.cn/': ('gamedog', 'send_gamedog_request'),
+    # 'http://www.shouyou520.com/game.php': ('shouyou520', 'send_shouyou520_request'),
+    # 'http://www.9game.cn/search': ('9game', 'send_9game_request'),
+    # 'http://anzhuoyuan.com/search': ('anzhuoyuan', 'send_anzhuoyuan_request'),
+    'http://www.appchina.com/sou/': ('appchina', 'send_appchina_request'),
+
+
 
 
 
