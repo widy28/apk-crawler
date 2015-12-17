@@ -11,10 +11,14 @@
 import os
 BOT_NAME = 'channels'
 
+# redis调度器
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+
 SPIDER_MODULES = ['channels.spiders']
 NEWSPIDER_MODULE = 'channels.spiders'
 
-ITEM_PIPELINES = ['channels.pipelines.MongoDBPipeline', ]
+ITEM_PIPELINES = ['channels.pipelines.MongoDBPipeline',
+                  'scrapy_redis.pipelines.RedisPipeline',]
 
 # 下载中间件
 DOWNLOADER_MIDDLEWARES = {
@@ -283,7 +287,7 @@ CHANNELS_URL_FUNCTION_DICT = {
     'http://android.d.cn/search/app/': ('dangle', 'send_dangle_request'),
     'http://s.pc6.com/cse/search?click=1&s=12026392560237532321&nsid=3&q=': ('pc6', 'send_pc6_request'),
     'http://search.520apk.com/cse/search?s=17910776473296434043&nsid=1&q=': ('apk520', 'send_apk520_request'),
-    # 'http://search.newhua.com/search_list.php?searchsid=6&app=search&controller=index&action=search&type=news&searchname=': ('newhua', 'send_newhua_request'),
+    'http://search.newhua.com/search_list.php?searchsid=6&app=search&controller=index&action=search&type=news&searchname=': ('newhua', 'send_newhua_request'),
     'http://m.onlinedown.net/index.php?os=1&search=': ('newhua', 'send_newhua_request'),
     'http://so.uzzf.com/cse/search?s=17102071521441408655&nsid=5&q=': ('dongpo', 'send_dongpo_request'),
     'http://app.cnmo.com/search/c=a&p=2&f=1&s=': ('cnmo', 'send_cnmo_request'),
@@ -304,7 +308,7 @@ CHANNELS_URL_FUNCTION_DICT = {
     'http://m.apkzu.com/e/search/index.php': ('anzu', 'send_anzu_request'),
     'http://bbs.mumayi.com/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes&inajax=1': ('mumayibbs', 'send_mumayibbs_request'),
     'http://www.2265.com/sea_{apk_name}.html': ('anzhuo2265', 'send_anzhuo2265_request'),
-    'http://www1.eben.cn/search/list/?search=': ('ErEb', 'send_ereb_request')
+    'http://www1.eben.cn/search/list/?search=': ('ErEb', 'send_ereb_request'),
     'http://a.4399.cn/search.html': ('sj4399', 'send_sj4399_request'),
     'http://www.25az.com/game': ('anzhuo25', 'send_anzhuo25_request'),
     'http://search.imobile.com.cn/index.php': ('imobile', 'send_imobile_request'),
@@ -357,6 +361,7 @@ CHANNELS_URL_FUNCTION_DICT = {
     'http://www.9game.cn/search': ('9game', 'send_9game_request'),
     'http://anzhuoyuan.com/search': ('anzhuoyuan', 'send_anzhuoyuan_request'),
     'http://www.appchina.com/sou/': ('appchina', 'send_appchina_request'),
+    'http://www.apkcn.com/search/': ('anqi', 'send_anqi_request'),
 
 
 
@@ -375,17 +380,13 @@ CHANNELS_URL_FUNCTION_DICT = {
 
 
 
-    # 'http://search.veryhuo.com/cse/search?q={apk_name}&click=1&s=2976565871270662586&nsid=2': ('veryhuo', 'send_veryhuo_request'), # todo 测试
+    'http://search.veryhuo.com/cse/search?q={apk_name}&click=1&s=2976565871270662586&nsid=2': ('veryhuo', 'send_veryhuo_request'),
 
-    # 'http://www.zhuodown.com/a/yingyongruanjian/': ('zhuodown', 'send_zhuodown_request'), # todo ,搜索有变化。无结果匹配
+    'http://www.zhuodown.com/a/yingyongruanjian/': ('zhuodown', 'send_zhuodown_request'),
+
     # 'http://app.3987.com/app/android.html': ('tongyi3987', 'send_tongyi3987_request'), # todo, 搜索s参数未获取
-    # 'http://www.apkcn.com/search/': ('anqi', 'send_anqi_request'), ## todo 无法下载
+
     # 'http://www.coolmart.net.cn/#id=search&key=': ('coolpai', 'send_coolpai_request'), # todo 无web页面版本
     # #http://app.taobao.com # todo 淘宝不支持搜索
     # 'http://www.sjvip.com'# todo 不支持搜索
-
 }
-## 23号发布
-## 主流银行的官方渠道加入进来
-## 添加新渠道
-
